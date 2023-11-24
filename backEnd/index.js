@@ -74,17 +74,22 @@ app.use(function(request, response, next) {
     next();
 });
 // 
-async function connectToDatabase() {
-    try {
-      await sequelize.authenticate();
-      console.log('Connection has been established successfully.');
-    } catch (error) {
-      console.error('Unable to connect to the database:', error);
-    }
+(async () => {
+    await db.sequelize.sync(); // This is gonna run MySQL code
+    connectToDatabase();
+  })(); // IIFE (immediately-invoked function expression) used to avoid polluting the global namespace.
+  
+  function connectToDatabase() {
+    db.sequelize
+      .authenticate()
+      .then(() => {
+        console.log('Connection has been established successfully.');
+      })
+      .catch((error) => {
+        console.error('Unable to connect to the database:', error);
+      });
   }
   
-  connectToDatabase();
-
 
 //port
 const PORT = 8001

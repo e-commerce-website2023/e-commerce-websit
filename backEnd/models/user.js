@@ -1,20 +1,19 @@
 module.exports = (sequelize, DataTypes) => {
-    //  creat a user
-        const User = sequelize.define('user', 
-        {
-            username: DataTypes.STRING,
-            password: DataTypes.STRING,
-            email: DataTypes.STRING,
-            hello: DataTypes.STRING,
-            hello: DataTypes.STRING,
+    const User = sequelize.define('User', {
+        username: DataTypes.STRING,
+        userLastname:DataTypes.STRING,
+        age: DataTypes.STRING,
+        password:DataTypes.STRING,
+        email: DataTypes.STRING,
+        role: {
+            type: DataTypes.ENUM('admin', 'client', 'seller'),
+            allowNull: false
         },
-        {
-            freezeTableName: true  // not to preulize our product name
-        });
-    
-        return User;
-    
-    };
+        // Other common attributes
+    }, {
+        freezeTableName: true
+    });
 
-
+    return User;
+};
 
