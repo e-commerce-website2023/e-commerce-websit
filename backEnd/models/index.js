@@ -18,7 +18,7 @@ sequelize.authenticate()
     console.log('connected..')
 })
 .catch(err => {
-    console.log('Error'+ err)
+    console.log('Errr'+ err)
 })
 
 
